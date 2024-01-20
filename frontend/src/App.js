@@ -11,8 +11,6 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/submission" element={<SubmissionPage />} />
-        <Route path="/CS1231" element={<CS1231 />} />
-        <Route path="/CG2023" element={<CG2023 />} />
       </Routes>
     </>
   );
