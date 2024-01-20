@@ -18,7 +18,7 @@ export default function Home() {
   const [sumText, setSumText] = useState("");
   const [qnText, setQnText] = useState("");
 
-  const handleSelectedModule = (moduleInfo) => {
+  function handleSelectModule(moduleInfo){
     setSelectedModule(moduleInfo);
     setShowModule(false);
   };
@@ -36,7 +36,7 @@ export default function Home() {
         <div className="sidebar-button-container">
           <button className="sidebar-button">Home</button>
           <p>List of Modules</p>
-          <Modules onSelectModule={handleSelectedModule} />
+          <Modules onSelectedModule={handleSelectModule} />
         </div>
         <div className="sidebar-button-container">
           <p>Make a notes submission here:</p>

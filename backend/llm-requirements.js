@@ -85,4 +85,3 @@ export const splitter = new RecursiveCharacterTextSplitter({
   chunkSize: 1000,
   chunkOverlap: 200,
 });
-

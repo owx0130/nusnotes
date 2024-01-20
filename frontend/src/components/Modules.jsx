@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-export default function Modules({onSelectModule}) {
+
+export default function Modules({onSelectedModule}) {
   const [modules, setModules] = useState([]);
   const [loading, setLoading] = useState(false);
   const [topics, setTopics] = useState([])
@@ -20,6 +21,7 @@ export default function Modules({onSelectModule}) {
         setLoading(false);
       });
   }, []);
+  console.log(typeof onSelectedModule)
 
 const handleClick = (code) =>{
     const modURL = `${URL}/${code}`
@@ -31,7 +33,7 @@ const handleClick = (code) =>{
           new Set(res.data.map((topic) => topic.topic))
         );
         setTopics(uniqueTopics);
-        onSelectModule({module:code, topics:uniqueTopics})
+        onSelectedModule({module:code, topics:uniqueTopics});
     
       })
       .finally(() => {
