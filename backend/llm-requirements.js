@@ -90,26 +90,26 @@ export const splitter = new RecursiveCharacterTextSplitter({
 });
 
 
-export const updatePinecone = async (docs,embedID, questions, questionID ) => {
-    const chunks = [docs]
-    const embedding = await new OpenAIEmbeddings({openAIApiKey: API_KEY}).embedDocuments(chunks);
-   console.log(embedding)
-// 9. Create and upsert vectors in batches of 100
-      const vector = {
-        id: embedID,
-        values: embedding[0],
-      };
+// export const updatePinecone = async (docs,embedID, questions, questionID ) => {
+//     const chunks = [docs]
+//     const embedding = await new OpenAIEmbeddings({openAIApiKey: API_KEY}).embedDocuments(chunks);
+//    console.log(embedding)
+// // 9. Create and upsert vectors in batches of 100
+//       const vector = {
+//         id: embedID,
+//         values: embedding[0],
+//       };
       
-     await pineconeIndex.upsert([vector]);
+//      await pineconeIndex.upsert([vector]);
 
-     const q = [questions]
-     const qEmbedding = await new OpenAIEmbeddings({openAIApiKey: API_KEY}).embedDocuments(q);
-     console.log(qEmbedding)
-  // 9. Create and upsert vectors in batches of 100
-        const qVector = {
-          id: questionID,
-          values: qEmbedding[0],
-        };
+//      const q = [questions]
+//      const qEmbedding = await new OpenAIEmbeddings({openAIApiKey: API_KEY}).embedDocuments(q);
+//      console.log(qEmbedding)
+//   // 9. Create and upsert vectors in batches of 100
+//         const qVector = {
+//           id: questionID,
+//           values: qEmbedding[0],
+//         };
         
-       await pineconeIndex.upsert([qVector]);
-};
+//        await pineconeIndex.upsert([qVector]);
+// };
