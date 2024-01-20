@@ -1,7 +1,7 @@
 //Import dependencies
 
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
-import { updatePinecone } from "./llm-requirements.js";
+// import { updatePinecone } from "./llm-requirements.js";
 
 import {
   summaryChain,
@@ -43,22 +43,23 @@ try{
     subject: title,
     topic: topic,
   });
-  console.log(summary)
   const questions = await combineQuestionChain.call({
     input: qn.map((item)=>item.text),
     subject: title,
     topic: topic,
   })
-  console.log(questions)
-  const embedID = `${title}-${topic}`
-  const questionID = `question-${embedID}`
-  await updatePinecone(summary.text,embedID,questions.text, questionID)
-
-return {summary,embedID,questions, questionID};
+  // const embedID = `${title}-${topic}`
+  // const questionID = `question-${embedID}`
+  //await updatePinecone(summary.text,embedID,questions.text, questionID)
+const sumText = summary.text
+const questionText = questions.text
+// console.log(sumText);
+// console.log(questionText)
+return {sumText,questionText};
 }
+
 catch(error){
   console.error("error loading pdf", error)
   throw(error);
 }
 }
-

@@ -4,10 +4,11 @@ import axios from "axios";
 
 export default function Main() {
   const INDIV_URL = "http://localhost:8000/pdfsummary";
-  const URL = "http://localhost:4000/summary"
+  const URL = "http://localhost:8000/summary"
   const [prompt, setPrompt] = useState(null);
   const [name, setName] = useState("");
   const [topic, setTopic] = useState("");
+  const [module,setModule] = useState("")
   //const [file, setfile] = useState("");
 
  
@@ -26,29 +27,26 @@ export default function Main() {
     console.log(prompt)
     const fd = new FormData();
     fd.append("prompt", prompt)
+    fd.append("module", module)
     fd.append("subject", name)
     fd.append("topic", topic)
     axios.post(INDIV_URL,fd).catch(function (error) {
-      console.log('IDK WHY ERROR');
+      console.log('Submit error');
     })
-    console.log("hi")
-    const embedID = `${name}-${topic}`
-    const questionID = `question-${embedID}`
-    postMongo(name,topic,embedID, questionID)
+    .then((res)=>{
+      console.log(res)
+    })
   }
-function postMongo(subject,topic,embedID,questionID){
-  axios.post(URL,{subject,topic,embedID,questionID})
-  .then((resp) =>{
-    console.log(resp)
-  }).catch(function (error) {
-    console.log('IDK WHY ERROR');
-  })
-}
 
   return (
     <div className="main">
       <h1>Your Personal Notes</h1>
       <form className="form-style">
+        <input
+        value={module}
+        onChange={(e)=>setModule(e.target.value.toUpperCase())}
+        placeholder="Module Code"
+        />
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
