@@ -86,3 +86,23 @@ if (!sum){
 res.status(200).json(sum)
 })
 
+
+app.patch("/pdfsummary/:id", upload.single("prompt"), async(req,res)=>{
+  const module = req.body.module
+  const subject = req.body.subject
+  const topic = req.body.topic
+  const id = req.params
+  const {sumText,questionText} = await handlePdfSummary(req.file,req.body.subject, req.body.topic);
+  const json = await Summary.findOneAndUpdate({_id:id},{
+    $push:{sumText: sumText},
+    $push:{questionText: questionText}
+  })
+  
+res.status(200).send(json)
+})
+
+app.delete("/pdfsummary/:id", async(req,res)=>{
+  const id =req.params
+  const json = await Summary.findOneAndDelete({_id: id})
+  res.status(200).json(json)
+})

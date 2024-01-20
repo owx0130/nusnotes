@@ -1,10 +1,9 @@
 //Import LangChain requirements
 import { OpenAI } from "langchain/llms/openai";
-import {OpenAIEmbeddings} from '@langchain/openai'
 import { LLMChain } from "langchain/chains";
 import { PromptTemplate } from "langchain/prompts";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
-import { Pinecone } from "@pinecone-database/pinecone";
+
 import "dotenv/config";
 
 //Set up ChatGPT API/LangChain
@@ -15,9 +14,6 @@ const model = new OpenAI({
   maxTokens: -1,
   openAIApiKey: API_KEY,
 });
-
-const pinecone = new Pinecone();
-const pineconeIndex = pinecone.Index(process.env.PINECONE_INDEX);
 
 //Set up Prompt Templates
 const summaryPrompt = PromptTemplate.fromTemplate(
