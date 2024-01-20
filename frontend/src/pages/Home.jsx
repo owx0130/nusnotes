@@ -69,20 +69,22 @@ export default function Home() {
             <div className="top-section-container">
               {showSum ? (
                 <>
-                  <h2>{selectedModule.module} Summary</h2>
+                  <h2  style={{ marginBottom: "20px" }}>{selectedModule.module} Summary</h2>
                   <button
                     onClick={() => setShowSum(false)}
                     className="btn btn-dark"
+                    style={{ marginBottom: "20px" }}
                   >
                     Test Yourself!
                   </button>
                 </>
               ) : (
                 <>
-                  <h2>{selectedModule.module} Quiz</h2>
+                  <h2  style={{ marginBottom: "20px" }}>{selectedModule.module} Quiz</h2>
                   <button
                     onClick={() => setShowSum(true)}
                     className="btn btn-dark"
+                    style={{ marginBottom: "20px" }}
                   >
                     Review Notes!
                   </button>

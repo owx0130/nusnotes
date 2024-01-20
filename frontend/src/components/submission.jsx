@@ -54,7 +54,7 @@ export default function Submission() {
     <div className="main">
       {showForm ? (
         <>
-          <h1>Submit New Notes!</h1>
+          <h2>Submit New Notes!</h2>
           <form className="form-style">
             <input
               value={module}
