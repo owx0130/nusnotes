@@ -3,6 +3,7 @@ import Modules from "../components/Modules";
 import { useState } from "react";
 import axios from "axios";
 import "../try.css";
+import logo from './image.png'
 
 export default function Home() {
   const [showModule, setShowModule] = useState(true);
@@ -35,10 +36,26 @@ export default function Home() {
     setShowModule(false)
   }
 
+  const reset = () =>{
+    setShowModule(true);
+    setSelectedModule({
+      module: "",
+      topics: [],
+    })
+    setSelectedTopics({
+      module: "",
+      topic: "",
+      sumText: "",
+      qnText: "",
+    })
+    setSumText("")
+    setQnText("")
+  }
+
   return (
     <div className="app">
       <div className="sidebar">
-        <h2 style={{ color: "whitesmoke" }}>NUSnotes</h2>
+        <img onClick={()=>reset} src={logo} alt="Logo" />
         <div className="sidebar-button-container">
           <button className="sidebar-button">Home</button>
           <p>List of Modules</p>
