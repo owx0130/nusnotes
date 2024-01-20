@@ -1,17 +1,14 @@
 import { Link } from "react-router-dom";
-import Modules from "./Modules";
-
+import Modules from "./modules";
 
 export default function Sidebar() {
   return (
     <div className="sidebar">
       <h2 style={{ color: "whitesmoke" }}>NUSnotes</h2>
       <div className="sidebar-button-container">
-        <Link to="/">
-          <button className="sidebar-button">Home</button>
-        </Link>
+        <button className="sidebar-button">Home</button>
         <p>List of Modules</p>
-        <Modules/>
+        <Modules />
       </div>
       <div className="sidebar-button-container">
         <p>Make a notes submission here:</p>
