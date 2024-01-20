@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Modules from "../components/Modules";
 import { useState } from "react";
 import axios from "axios";
+import "../try.css";
 
 export default function Home() {
   const [showModule, setShowModule] = useState(true);
@@ -83,7 +84,7 @@ export default function Home() {
                 
                 <div class="collapse" id="cs1231_1">
                   <div class="card card-body">
-                    <pre>{sumText}</pre>
+                    <pre class="sumtext">{sumText}</pre>
                   </div>
                 </div>
                 </>
