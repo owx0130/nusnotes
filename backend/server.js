@@ -106,8 +106,8 @@ app.patch("/pdfsummary/:id", upload.single("prompt"), async(req,res)=>{
 res.status(200).send(json)
 })
 
-app.delete("/pdfsummary/:id", async(req,res)=>{
-  const id =req.params
-  const json = await Summary.findOneAndDelete({_id: id})
+app.delete("/pdfsummary/:module/:topic", async(req,res)=>{
+  const {module,topic} = req.params
+  const json = await Summary.findOneAndDelete({"module":module, "topic": topic})
   res.status(200).json(json)
 })

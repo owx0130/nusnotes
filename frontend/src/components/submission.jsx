@@ -15,6 +15,9 @@ export default function Submission() {
     event.preventDefault();
     if(!showForm){
       setMessage("Let's try again! :)")
+      axios.delete(`INDIV_URL/${module}/${topic}`)
+      setSumText("")
+      setLoading(true)
     }
     console.log(prompt);
     const fd = new FormData();
@@ -31,6 +34,7 @@ export default function Submission() {
       .then((res) => {
         console.log(res)
         setSumText(res.data.sumText);
+        setMessage("")
       })
       .finally(() => setLoading(false));
   }
