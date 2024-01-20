@@ -67,7 +67,7 @@ export default function Home() {
                 <button className="btn btn-dark">Test Yourself!</button>
               </div>
               <div>
-                {selectedModule.topics.map((topic) => (
+                {selectedModule.topics.map((topic, id) => (
                   <>
                   <p>
                     <button
@@ -75,9 +75,9 @@ export default function Home() {
                       type="button"
                       key={topic}
                       data-bs-toggle="collapse"
-                      data-bs-target="#cs1231_1"
+                      data-bs-target={`#cs1231_${id}`}
                       aria-expanded="false"
-                      aria-controls="cs1231_1"
+                      aria-controls={`cs1231_${id}`}
                       onClick={() =>
                         handleTopicClick(selectedModule.module, topic)
                       }
@@ -86,7 +86,7 @@ export default function Home() {
                     </button>
                   </p>
                 
-                <div class="collapse" id="cs1231_1">
+                <div class="collapse" id={`cs1231_${id}`}>
                   <div class="card card-body">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16"onClick={()=>handleDelete(selectedModule.module, topic)} >
   <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
