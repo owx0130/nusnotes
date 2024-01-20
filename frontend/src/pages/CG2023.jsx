@@ -1,11 +1,11 @@
-import AIFeed from "../components/aifeed";
+import CG2023Content from "../components/CG2023content";
 import Sidebar from "../components/sidebar";
 
-export default function AI() {
+export default function CG2023() {
   return (
     <div className="app">
       <Sidebar />
-      <AIFeed />
+      <CG2023Content />
     </div>
   )
 }

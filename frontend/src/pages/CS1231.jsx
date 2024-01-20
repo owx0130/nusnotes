@@ -1,11 +1,11 @@
-import Homepage from "../components/homepage";
+import CS1231Content from "../components/CS1231content";
 import Sidebar from "../components/sidebar";
 
-export default function Home() {
+export default function CS1231() {
   return (
     <div className="app">
       <Sidebar />
-      <Homepage />
+      <CS1231Content />
     </div>
   )
 }

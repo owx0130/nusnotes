@@ -9,6 +9,11 @@ body {
   margin: 0;
 }
 
+h2, p {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
 .app {
   display: flex;
 }

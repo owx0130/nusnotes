@@ -1,11 +1,11 @@
-import ChinaFeed from "../components/chinafeed";
+import Submission from "../components/submission";
 import Sidebar from "../components/sidebar";
 
-export default function China() {
+export default function SubmissionPage() {
   return (
     <div className="app">
       <Sidebar />
-      <ChinaFeed />
+      <Submission />
     </div>
   )
 }
