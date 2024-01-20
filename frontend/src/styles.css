@@ -9,6 +9,11 @@ body {
   margin: 0;
 }
 
+h2, p {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
 .app {
   display: flex;
 }
@@ -31,17 +36,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  overflow: auto;
-}
-
-.sub {
-  background-color:white;
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
   justify-content: space-between;
   overflow: auto;
 }
@@ -105,13 +99,6 @@ table, th, td, tr {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.top-section {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
 }
 
 .refresh-button {

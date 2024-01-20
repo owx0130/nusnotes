@@ -1,11 +1,11 @@
-import CG2023_content from "../components/cg2023_content";
+import CG2023Content from "../components/CG2023content";
 import Sidebar from "../components/sidebar";
 
-export default function cg2023() {
+export default function CG2023() {
   return (
     <div className="app">
       <Sidebar />
-      <CG2023_content />
+      <CG2023Content />
     </div>
   )
 }
