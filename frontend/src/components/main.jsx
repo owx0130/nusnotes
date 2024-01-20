@@ -1,6 +1,6 @@
-import React, {useCallback, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import {useDropzone} from 'react-dropzone';
+
 
 export default function Main() {
   const INDIV_URL = "http://localhost:8000/pdfsummary";
@@ -8,18 +8,18 @@ export default function Main() {
   const [prompt, setPrompt] = useState(null);
   const [name, setName] = useState("");
   const [topic, setTopic] = useState("");
-  const [file, setfile] = useState("");
+  //const [file, setfile] = useState("");
 
  
 
-  const onDrop = useCallback(acceptedFiles => {
-    // Do something with the files
-    console.log(acceptedFiles);
-    setfile(acceptedFiles[0].name);
-    setPrompt(acceptedFiles[0]);
-  }, [])
+  // const onDrop = useCallback(acceptedFiles => {
+  //   // Do something with the files
+  //   console.log(acceptedFiles);
+  //   setfile(acceptedFiles[0].name);
+  //   setPrompt(acceptedFiles[0].path);
+  // }, [])
 
-  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
+  //const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -33,15 +33,11 @@ export default function Main() {
     })
     console.log("hi")
     const embedID = `${name}-${topic}`
-    postMongo(name,topic,embedID)
-
-    //reset options
-    setName("");
-    setTopic("");
-    setfile("");
+    const questionID = `question-${embedID}`
+    postMongo(name,topic,embedID, questionID)
   }
-function postMongo(subject,topic,embedID){
-  axios.post(URL,{subject,topic,embedID})
+function postMongo(subject,topic,embedID,questionID){
+  axios.post(URL,{subject,topic,embedID,questionID})
   .then((resp) =>{
     console.log(resp)
   }).catch(function (error) {
@@ -67,7 +63,7 @@ function postMongo(subject,topic,embedID){
           type="file"
           accept=".pdf"
         /> */}
-          <div {...getRootProps()}>
+          {/* <div {...getRootProps()}>
             <input {...getInputProps()} />
             {
               isDragActive ?
@@ -75,7 +71,11 @@ function postMongo(subject,topic,embedID){
               <p>Drag 'n' drop some files here, or click to select files</p>
             }
             <div>{file}</div>
-          </div>
+          </div> */}
+<input
+          onChange={(e) => setPrompt(e.target.files[0])}
+          type="file"
+        />
         <button onClick={(e) => handleSubmit(e)}>Submit</button>
       </form>
     </div>
