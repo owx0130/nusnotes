@@ -21,22 +21,22 @@ export default function Sidebar() {
           <ul class="dropdown-menu">
             <li>
               <a class="dropdown-item" href="/cs1231_1">
-                Action
+                Chapter 1
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/cs1231_2">
+                Chapter 2
               </a>
             </li>
             <li>
               <a class="dropdown-item" href="#">
-                Another action
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">
-                Something else here
+                Chapter 3
               </a>
             </li>
           </ul>
         </div>
-        <Link to="/infrastructureslow">
+        <Link to="/CG2023">
           <button className="sidebar-button">CG2023</button>
         </Link>
       </div>
