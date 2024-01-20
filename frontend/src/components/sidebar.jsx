@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Modules from "./modules";
+import Modules from "./Modules";
 
 export default function Sidebar() {
   return (

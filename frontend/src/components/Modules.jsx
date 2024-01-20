@@ -1,14 +1,13 @@
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-
-export default function Modules() {
+export default function Modules({onSelectModule}) {
   const [modules, setModules] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [topics, setTopics] = useState([])
+  
+  const URL = "http://localhost:8000/pdfsummary";
   useEffect(() => {
     setLoading(true);
-    const URL = "http://localhost:8000/pdfsummary";
     axios
       .get(URL)
       .then((res) => {
@@ -22,6 +21,24 @@ export default function Modules() {
       });
   }, []);
 
+const handleClick = (code) =>{
+    const modURL = `${URL}/${code}`
+    axios
+      .get(modURL)
+      .then((res) => {
+        console.log(res)
+        const uniqueTopics = Array.from(
+          new Set(res.data.map((topic) => topic.topic))
+        );
+        setTopics(uniqueTopics);
+        onSelectModule({module:code, topics:uniqueTopics})
+    
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+}
+
   return (
     <>
       {loading ? (
@@ -30,7 +47,7 @@ export default function Modules() {
         </div>
       ) : modules.length > 0 ? (
         modules.map((module) => (
-          <button className="sidebar-button">{module}</button>
+          <button key={module} onClick={()=>handleClick(module)} className="sidebar-button">{module}</button>
         ))
       ) : (
         <p>No Modules</p>

@@ -72,18 +72,23 @@ app.get("/pdfsummary", async(req,res) =>{
   res.status(200).json(summaries)
 })
 
-app.get("/pdfsummary/:id", async(req,res)=>{
-  const {id} = req.params
+app.get("/pdfsummary/:module", async(req,res)=>{
+  const {module} = req.params
 
-  if (!mongoose.Types.ObjectId.isValid(id)){
-    return res.status(404).json({error: "no such entry"})
-}
-const sum = await Summary.findById(id)
+const sum = await Summary.find({"module" :module}).sort({createdAt:-1})
 if (!sum){
     return res.status(400).json({error: "No such entry"})
 }
-
 res.status(200).json(sum)
+})
+
+app.get("/pdfsummary/:module/:topic", async (req,res)=>{
+  const {module,topic} = req.params
+  const sum = await Summary.find({"module":module, "topic": topic})
+  if (!sum){
+    return res.status(400).json({error: "No such entry"})
+}
+  res.status(200).json(sum)
 })
 
 

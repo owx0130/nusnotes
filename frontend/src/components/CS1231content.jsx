@@ -1,5 +1,10 @@
-export default function CS1231Content() {
+import axios from 'axios'
+import { useModuleContext } from "../context/useModuleContext";
+
+export default function Content() {
   
+  const {modules, dispatch} = useModuleContext()
+
   return (
     <div className="main">
       <div className="top-section-container">
