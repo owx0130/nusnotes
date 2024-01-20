@@ -14,8 +14,8 @@ app.use(cors());
 mongoose.connect(process.env.MONGO_URI)
     .then(() =>{
         // listen for requests
-        app.listen(4000, () =>{
-            console.log('connected to MongoDB & listening to port', 4000,'!')
+        app.listen(PORT, () =>{
+            console.log('connected to MongoDB & listening to port', PORT,'!')
         })
     })
     .catch((error) =>{
@@ -28,15 +28,22 @@ const storage = multer.memoryStorage(); // Store the file in memory
 const upload = multer({ storage: storage });
 
 app.post("/pdfsummary", upload.single("prompt"), async(req,res)=>{
-  const summary = await handlePdfSummary(req.file,req.body.subject, req.body.topic);
-  res.send(summary);
+  const module = req.body.module
+  const subject = req.body.subject
+  const topic = req.body.topic
+  const {sumText,questionText} = await handlePdfSummary(req.file,req.body.subject, req.body.topic);
+  console.log(sumText)
+  const summary = await Summary.create({module,subject,topic,sumText, questionText})
+res.status(200).send(summary)
 })
-app.listen(PORT, () => console.log("Your server is running on Port " + PORT));
-
 
 const Schema = mongoose.Schema
 
 const summarySchema = new Schema({
+    module:{
+        type:String,
+        required: true
+    },
     subject: {
         type: String,
         required: true
@@ -45,39 +52,57 @@ const summarySchema = new Schema({
         type: String,
         required:true
     },
-    embedID:{
-        type:String,
-        required:true
+    sumText:{
+      type: String,
+      required: true
     },
-    questionID:{
-      type:String,
+    questionText:{
+      type: String,
       required:true
     }
 })
 
+
 const Summary = mongoose.model('Summary',summarySchema)
 
-app.post("/summary", async(req,res) =>{
-  const {subject,topic,embedID, questionID} = req.body
-  try {
-    const sum = await Summary.create({subject,topic,embedID, questionID})
-    res.status(200).json(sum)
-  }catch(error){
-    res.status(400).json({error:error.message})
-  }
+
+app.get("/pdfsummary", async(req,res) =>{
+  const summaries = await Summary.find({}).sort({createdAt: -1})
+
+  res.status(200).json(summaries)
 })
 
-app.get("/summary:id", async(req,res)=>{
+app.get("/pdfsummary/:id", async(req,res)=>{
   const {id} = req.params
 
   if (!mongoose.Types.ObjectId.isValid(id)){
     return res.status(404).json({error: "no such entry"})
 }
 const sum = await Summary.findById(id)
-
 if (!sum){
     return res.status(400).json({error: "No such entry"})
 }
 
 res.status(200).json(sum)
+})
+
+
+app.patch("/pdfsummary/:id", upload.single("prompt"), async(req,res)=>{
+  const module = req.body.module
+  const subject = req.body.subject
+  const topic = req.body.topic
+  const id = req.params
+  const {sumText,questionText} = await handlePdfSummary(req.file,req.body.subject, req.body.topic);
+  const json = await Summary.findOneAndUpdate({_id:id},{
+    $push:{sumText: sumText},
+    $push:{questionText: questionText}
+  })
+  
+res.status(200).send(json)
+})
+
+app.delete("/pdfsummary/:id", async(req,res)=>{
+  const id =req.params
+  const json = await Summary.findOneAndDelete({_id: id})
+  res.status(200).json(json)
 })
