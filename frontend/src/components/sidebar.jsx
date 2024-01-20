@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import Modules from "./Modules";
+
 
 export default function Sidebar() {
   return (
@@ -9,12 +11,7 @@ export default function Sidebar() {
           <button className="sidebar-button">Home</button>
         </Link>
         <p>List of Modules</p>
-        <Link to="/CS1231">
-          <button className="sidebar-button">CS1231</button>
-        </Link>
-        <Link to="/CG2023">
-          <button className="sidebar-button">CG2023</button>
-        </Link>
+        <Modules/>
       </div>
       <div className="sidebar-button-container">
         <p>Make a notes submission here:</p>
