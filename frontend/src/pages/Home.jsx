@@ -40,7 +40,13 @@ export default function Home() {
   return (
     <div className="app">
       <div className="sidebar">
-        <img src={logo} alt="Logo" />
+        <Link to='/'>
+        <img 
+        onClick={() => setShowModule(true)}
+        className="img-thumbnail"
+        style={{ backgroundColor: "transparent", border: "none" }}
+        src={logo} alt="Logo" />
+        </Link>
         <div className="sidebar-button-container">
           <Link to="/">
             <button

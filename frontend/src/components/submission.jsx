@@ -15,7 +15,7 @@ export default function Submission() {
     event.preventDefault();
     if(!showForm){
       setMessage("Let's try again! :)")
-      axios.delete(`INDIV_URL/${module}/${topic}`)
+      axios.delete(`${INDIV_URL}/${module}/${topic}`)
       setSumText("")
       setLoading(true)
     }
@@ -41,7 +41,7 @@ export default function Submission() {
 
   const handleApprove= (e)=> {
     e.preventDefault()
-    alert("Nice")
+    alert("Added!")
     setShowForm(true);
     setMessage("")
     setModule("")
@@ -86,8 +86,10 @@ export default function Submission() {
           ) : (
             <>
             <pre className="summarydisplay">{sumText}</pre>
+            <div className="button-container">
             <button type="button" class="btn btn-outline-danger" onClick={(e)=>handleSubmit(e)}>Decline</button>
             <button type="button" class="btn btn-outline-success" onClick={(e)=> handleApprove(e)}>Approve</button>
+            </div>
             </>
           )}
           {

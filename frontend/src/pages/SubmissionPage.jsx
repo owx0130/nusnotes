@@ -4,6 +4,7 @@ import Modules from "../components/Modules";
 import { useState } from "react";
 import axios from "axios";
 import logo from "./image.png";
+import WelcomeMessage from "../components/welcome";
 
 export default function SubmissionPage() {
   const [showModule, setShowModule] = useState(true);
@@ -42,7 +43,12 @@ export default function SubmissionPage() {
   return (
     <div className="app">
       <div className="sidebar">
-      <img src={logo} alt="Logo" />
+        <Link to="/">
+      <img 
+      className="img-thumbnail"
+      style={{ backgroundColor: "transparent", border: "none", cursor: "pointer" }}
+      src={logo} alt="Logo" />
+      </Link>
         <div className="sidebar-button-container">
           <Link to="/">
             <button className="sidebar-button">Home</button>
@@ -68,12 +74,7 @@ export default function SubmissionPage() {
         <div className="main">
           <>
             {showModule ? (
-              <>
-                <div className="top-section-container">
-                  <h2>Welcome to NUSnotes!</h2>
-                </div>
-                <div>To do: Write introduction here</div>
-              </>
+              <WelcomeMessage/>
             ) : (
               <>
                 <div className="top-section-container">
